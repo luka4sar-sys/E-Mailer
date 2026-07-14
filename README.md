@@ -23,7 +23,7 @@ chmod +x scripts/*.sh
 ./scripts/install.sh
 ```
 
-Then open:
+Then open the mail UI:
 
 ```txt
 http://localhost:8080
@@ -32,7 +32,7 @@ http://localhost:8080
 Admin console:
 
 ```txt
-http://localhost:8080/admin.html
+http://localhost:8080/admin
 ```
 
 ## Manual Docker Start
@@ -44,7 +44,7 @@ docker compose up -d --build
 
 ## Services
 
-- `admin-ui`: static web interface with separate mail UI and admin console.
+- `admin-ui`: Next.js web app with separate mail UI and admin console.
 - `api`: domain and DNS guidance API.
 - `postgres`: storage for domains and mailboxes.
 
