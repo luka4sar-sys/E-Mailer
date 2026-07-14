@@ -20,48 +20,68 @@ import {
 
 import { Brand } from "@/components/brand";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 
 const messages = [
   {
     sender: "E-Mailer Setup",
+    from: "setup@e-mailer.local",
+    to: "luka@e-mailer.local",
     time: "09:24",
     subject: "DNS records are ready for your domain",
     preview: "MX, SPF, DKIM, DMARC and mail host records were generated.",
-    kicker: "Setup assistant",
-    body: "Your domain setup package is ready. Publish MX, SPF, DKIM and DMARC records at your DNS provider, then return to the admin console for verification.",
+    body: [
+      "Your domain setup package is ready.",
+      "Publish MX, SPF, DKIM and DMARC records at your DNS provider, then return to the admin console for verification.",
+      "The mail interface stays separate from server administration, so mailbox users never touch infrastructure controls.",
+    ],
   },
   {
     sender: "Postmaster",
+    from: "postmaster@e-mailer.local",
+    to: "luka@e-mailer.local",
     time: "08:12",
     subject: "Deliverability baseline configured",
     preview: "Your server identity is ready for the next verification pass.",
-    kicker: "Postmaster",
-    body: "Server identity checks are prepared. Reverse DNS, HELO hostname and outbound policy checks will be validated once the mail stack is enabled.",
+    body: [
+      "Server identity checks are prepared.",
+      "Reverse DNS, HELO hostname and outbound policy checks will be validated once the mail stack is enabled.",
+    ],
   },
   {
     sender: "Security Monitor",
+    from: "security@e-mailer.local",
+    to: "admin@e-mailer.local",
     time: "Yesterday",
     subject: "Admin login protection is enabled",
     preview: "Session hardening and audit events are prepared for the console.",
-    kicker: "Security",
-    body: "Admin sessions, audit trails and sign-in hardening are separated from webmail. Mail users do not share the same control plane as server administrators.",
+    body: [
+      "Admin sessions, audit trails and sign-in hardening are separated from webmail.",
+      "Mail users do not share the same control plane as server administrators.",
+    ],
   },
   {
     sender: "Mailbox Engine",
+    from: "mailbox@e-mailer.local",
+    to: "luka@e-mailer.local",
     time: "Jul 14",
     subject: "IMAP service placeholder connected",
     preview: "Dovecot integration is planned in the next milestone.",
-    kicker: "Mailbox engine",
-    body: "The current MVP keeps the visual mailbox ready while Dovecot integration is still planned. The UI contract is independent from admin setup.",
+    body: [
+      "The current MVP keeps the visual mailbox ready while Dovecot integration is still planned.",
+      "The UI contract is independent from admin setup.",
+    ],
   },
   {
     sender: "Spam Control",
+    from: "rspamd@e-mailer.local",
+    to: "postmaster@e-mailer.local",
     time: "Jul 14",
     subject: "Rspamd module awaiting activation",
     preview: "DKIM signing and spam rules will move into the mail stack layer.",
-    kicker: "Spam control",
-    body: "Spam filtering and DKIM signing will live in the server stack. The mailbox interface will only display results and user-level actions.",
+    body: [
+      "Spam filtering and DKIM signing will live in the server stack.",
+      "The mailbox interface will only display results and user-level actions.",
+    ],
   },
 ];
 
@@ -191,7 +211,7 @@ export function MailClient() {
         <div className="reader-toolbar">
           <div>
             <p>
-              {active.sender} · {active.time}
+              {active.sender} - {active.time}
             </p>
             <h2>{active.subject}</h2>
           </div>
@@ -205,14 +225,33 @@ export function MailClient() {
           </div>
         </div>
 
-        <Card className="mail-card">
-          <CardContent>
-            <div className="mail-empty-icon" aria-hidden="true" />
-            <p className="mail-kicker">{active.kicker}</p>
-            <h3>{active.subject}</h3>
-            <p>{active.body}</p>
-          </CardContent>
-        </Card>
+        <article className="email-document">
+          <header className="email-header">
+            <div className="sender-avatar">{active.sender.slice(0, 1)}</div>
+            <div className="email-heading">
+              <p>{active.sender}</p>
+              <h3>{active.subject}</h3>
+            </div>
+            <time>{active.time}</time>
+          </header>
+
+          <dl className="email-meta">
+            <div>
+              <dt>From</dt>
+              <dd>{active.from}</dd>
+            </div>
+            <div>
+              <dt>To</dt>
+              <dd>{active.to}</dd>
+            </div>
+          </dl>
+
+          <div className="email-body">
+            {active.body.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        </article>
       </section>
     </main>
   );
