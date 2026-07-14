@@ -29,6 +29,12 @@ Then open:
 http://localhost:8080
 ```
 
+Admin console:
+
+```txt
+http://localhost:8080/admin.html
+```
+
 ## Manual Docker Start
 
 ```bash
@@ -38,7 +44,7 @@ docker compose up -d --build
 
 ## Services
 
-- `admin-ui`: web admin interface.
+- `admin-ui`: static web interface with separate mail UI and admin console.
 - `api`: domain and DNS guidance API.
 - `postgres`: storage for domains and mailboxes.
 

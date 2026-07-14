@@ -3,7 +3,6 @@ const domainListEl = document.querySelector("#domain-list");
 const formEl = document.querySelector("#domain-form");
 const templateEl = document.querySelector("#domain-template");
 const domainCountEl = document.querySelector("#domain-count");
-const messageEls = document.querySelectorAll(".message");
 
 async function api(path, options = {}) {
   const response = await fetch(path, {
@@ -91,15 +90,5 @@ formEl.addEventListener("submit", async (event) => {
   formEl.reset();
   await loadDomains();
 });
-
-for (const messageEl of messageEls) {
-  messageEl.addEventListener("click", () => {
-    for (const item of messageEls) {
-      item.classList.remove("active");
-    }
-
-    messageEl.classList.add("active");
-  });
-}
 
 loadDomains();
