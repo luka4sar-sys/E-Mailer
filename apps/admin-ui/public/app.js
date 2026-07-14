@@ -2,6 +2,8 @@ const statusEl = document.querySelector("#api-status");
 const domainListEl = document.querySelector("#domain-list");
 const formEl = document.querySelector("#domain-form");
 const templateEl = document.querySelector("#domain-template");
+const domainCountEl = document.querySelector("#domain-count");
+const messageEls = document.querySelectorAll(".message");
 
 async function api(path, options = {}) {
   const response = await fetch(path, {
@@ -21,6 +23,7 @@ async function api(path, options = {}) {
 
 function renderDomains(domains) {
   domainListEl.innerHTML = "";
+  domainCountEl.textContent = String(domains.length);
 
   if (domains.length === 0) {
     const empty = document.createElement("div");
@@ -62,13 +65,13 @@ async function loadDomains() {
   try {
     const health = await api("/health");
     statusEl.textContent = health.ok ? "API online" : "API degraded";
-    statusEl.className = "status-pill ok";
+    statusEl.className = "status-chip ok";
 
     const data = await api("/api/domains");
     renderDomains(data.domains);
   } catch (error) {
     statusEl.textContent = "API offline";
-    statusEl.className = "status-pill error";
+    statusEl.className = "status-chip error";
     renderDomains([]);
   }
 }
@@ -88,5 +91,15 @@ formEl.addEventListener("submit", async (event) => {
   formEl.reset();
   await loadDomains();
 });
+
+for (const messageEl of messageEls) {
+  messageEl.addEventListener("click", () => {
+    for (const item of messageEls) {
+      item.classList.remove("active");
+    }
+
+    messageEl.classList.add("active");
+  });
+}
 
 loadDomains();

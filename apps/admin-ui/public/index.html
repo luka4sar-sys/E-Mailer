@@ -3,68 +3,234 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>E-Mailer Admin</title>
+    <title>E-Mailer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <main class="app-shell">
-      <aside class="sidebar" aria-label="Main navigation">
-        <div class="brand">
-          <div class="brand-mark">E</div>
+    <main class="mail-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="E-Mailer home">
+          <span class="brand-mark" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <span class="brand-word">E-Mailer</span>
+        </a>
+
+        <nav class="workspace-switcher" aria-label="Workspace">
+          <button class="switcher-button active" type="button" title="Mail">
+            <span class="icon">mail</span>
+          </button>
+          <button class="switcher-button" type="button" title="Calendar">
+            <span class="icon">calendar</span>
+          </button>
+          <button class="switcher-button" type="button" title="Domains">
+            <span class="icon">dns</span>
+          </button>
+        </nav>
+
+        <label class="search">
+          <span class="icon">search</span>
+          <input type="search" placeholder="Search mail" />
+        </label>
+
+        <div class="topbar-actions">
+          <div class="status-chip" id="api-status">Checking API</div>
+          <button class="ghost-button" type="button" title="Help">?</button>
+          <button class="ghost-button" type="button" title="Sync">sync</button>
+          <button class="ghost-button" type="button" title="Settings">gear</button>
+          <button class="avatar-button" type="button" aria-label="Account">L</button>
+        </div>
+      </header>
+
+      <aside class="sidebar" aria-label="Mail folders">
+        <button class="compose-button" type="button">Compose</button>
+
+        <nav class="folder-list">
+          <a class="folder active" href="#inbox">
+            <span class="icon">inbox</span>
+            <span>Inbox</span>
+            <strong>18</strong>
+          </a>
+          <a class="folder" href="#drafts">
+            <span class="icon">drafts</span>
+            <span>Drafts</span>
+            <strong>2</strong>
+          </a>
+          <a class="folder" href="#sent">
+            <span class="icon">sent</span>
+            <span>Sent</span>
+          </a>
+          <a class="folder" href="#spam">
+            <span class="icon">blocked</span>
+            <span>Spam</span>
+          </a>
+          <a class="folder" href="#trash">
+            <span class="icon">trash</span>
+            <span>Trash</span>
+          </a>
+          <a class="folder" href="#archive">
+            <span class="icon">archive</span>
+            <span>Archive</span>
+          </a>
+        </nav>
+
+        <section class="sidebar-section">
+          <div class="section-title">
+            <span>E-Mailer Updates</span>
+            <button class="tiny-button" type="button">open</button>
+          </div>
+          <p>Product releases, DNS health alerts, and security notices.</p>
+        </section>
+
+        <section class="storage-card">
+          <div class="storage-head">
+            <strong>Storage</strong>
+            <button type="button">Add</button>
+          </div>
+          <div class="storage-bar">
+            <span style="width: 4%"></span>
+          </div>
+          <div class="storage-meta">
+            <span>420 MB of 10 GB</span>
+            <span>4%</span>
+          </div>
+        </section>
+      </aside>
+
+      <section class="message-list" aria-label="Inbox messages">
+        <div class="list-header">
           <div>
-            <strong>E-Mailer</strong>
-            <span>Admin Console</span>
+            <p>Inbox</p>
+            <h1>Unified Mail</h1>
+          </div>
+          <button class="filter-button" type="button">Today</button>
+        </div>
+
+        <article class="message active">
+          <div class="sender-row">
+            <strong>E-Mailer Setup</strong>
+            <time>09:24</time>
+          </div>
+          <h2>DNS records are ready for your domain</h2>
+          <p>MX, SPF, DKIM, DMARC and mail host records were generated.</p>
+        </article>
+
+        <article class="message">
+          <div class="sender-row">
+            <strong>Postmaster</strong>
+            <time>08:12</time>
+          </div>
+          <h2>Deliverability baseline configured</h2>
+          <p>Your server identity is ready for the next verification pass.</p>
+        </article>
+
+        <article class="message">
+          <div class="sender-row">
+            <strong>Security Monitor</strong>
+            <time>Yesterday</time>
+          </div>
+          <h2>Admin login protection is enabled</h2>
+          <p>Session hardening and audit events are prepared for the console.</p>
+        </article>
+
+        <article class="message">
+          <div class="sender-row">
+            <strong>Mailbox Engine</strong>
+            <time>Jul 14</time>
+          </div>
+          <h2>IMAP service placeholder connected</h2>
+          <p>Dovecot integration is planned in the next milestone.</p>
+        </article>
+
+        <article class="message">
+          <div class="sender-row">
+            <strong>Spam Control</strong>
+            <time>Jul 14</time>
+          </div>
+          <h2>Rspamd module awaiting activation</h2>
+          <p>DKIM signing and spam rules will move into the mail stack layer.</p>
+        </article>
+      </section>
+
+      <section class="reader" aria-label="Selected message">
+        <div class="reader-toolbar">
+          <div>
+            <p>Selected mail</p>
+            <h2>DNS records are ready for your domain</h2>
+          </div>
+          <div class="reader-actions">
+            <button type="button">archive</button>
+            <button type="button">reply</button>
           </div>
         </div>
 
-        <nav class="nav-list">
-          <a class="active" href="#domains">Domains</a>
-          <a href="#mailboxes">Mailboxes</a>
-          <a href="#security">Security</a>
-          <a href="#logs">Logs</a>
-        </nav>
-      </aside>
+        <article class="mail-preview">
+          <div class="mail-icon" aria-hidden="true"></div>
+          <p class="preview-kicker">Setup assistant</p>
+          <h3>Connect a domain, publish records, then forget the boring mail server work.</h3>
+          <p>
+            E-Mailer keeps the admin workflow close to the mailbox experience: domain setup,
+            DNS guidance, storage, security and future webmail live in one focused interface.
+          </p>
+        </article>
 
-      <section class="content">
-        <header class="topbar">
-          <div>
-            <p class="eyebrow">Self-hosted mail setup</p>
-            <h1>Domains</h1>
+        <section class="metrics-grid" aria-label="Mail metrics">
+          <div class="metric">
+            <span>Domains</span>
+            <strong id="domain-count">0</strong>
           </div>
-          <div class="status-pill" id="api-status">Checking API</div>
-        </header>
-
-        <section class="setup-panel">
-          <div>
-            <h2>Add a mail domain</h2>
-            <p>Enter your domain and mail hostname. E-Mailer will generate the DNS records you need to add at your DNS provider.</p>
+          <div class="metric">
+            <span>DNS checks</span>
+            <strong>5</strong>
           </div>
-
-          <form id="domain-form" class="domain-form">
-            <label>
-              Domain
-              <input id="domain-name" name="name" placeholder="example.com" autocomplete="off" required />
-            </label>
-            <label>
-              Mail hostname
-              <input id="domain-hostname" name="hostname" placeholder="mail.example.com" autocomplete="off" />
-            </label>
-            <button type="submit">Add domain</button>
-          </form>
+          <div class="metric">
+            <span>Mailbox state</span>
+            <strong>Ready</strong>
+          </div>
         </section>
-
-        <section class="domain-grid" id="domain-list" aria-live="polite"></section>
       </section>
+
+      <aside class="admin-panel" aria-label="Domain setup">
+        <div class="panel-head">
+          <div>
+            <p>Admin Console</p>
+            <h2>Domain Setup</h2>
+          </div>
+          <span class="panel-badge">MVP</span>
+        </div>
+
+        <form id="domain-form" class="domain-form">
+          <label>
+            <span>Domain</span>
+            <input id="domain-name" name="name" placeholder="example.com" autocomplete="off" required />
+          </label>
+          <label>
+            <span>Mail hostname</span>
+            <input id="domain-hostname" name="hostname" placeholder="mail.example.com" autocomplete="off" />
+          </label>
+          <button type="submit">Generate DNS</button>
+        </form>
+
+        <section class="domain-list" id="domain-list" aria-live="polite"></section>
+      </aside>
     </main>
 
     <template id="domain-template">
       <article class="domain-card">
-        <div class="domain-header">
+        <div class="domain-card-head">
           <div>
             <h3></h3>
             <p></p>
           </div>
-          <span class="badge">DNS required</span>
+          <span>DNS</span>
         </div>
         <div class="records"></div>
       </article>
