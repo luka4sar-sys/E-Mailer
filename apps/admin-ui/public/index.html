@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>E-Mailer Admin</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <div class="brand">
+          <div class="brand-mark">E</div>
+          <div>
+            <strong>E-Mailer</strong>
+            <span>Admin Console</span>
+          </div>
+        </div>
+
+        <nav class="nav-list">
+          <a class="active" href="#domains">Domains</a>
+          <a href="#mailboxes">Mailboxes</a>
+          <a href="#security">Security</a>
+          <a href="#logs">Logs</a>
+        </nav>
+      </aside>
+
+      <section class="content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Self-hosted mail setup</p>
+            <h1>Domains</h1>
+          </div>
+          <div class="status-pill" id="api-status">Checking API</div>
+        </header>
+
+        <section class="setup-panel">
+          <div>
+            <h2>Add a mail domain</h2>
+            <p>Enter your domain and mail hostname. E-Mailer will generate the DNS records you need to add at your DNS provider.</p>
+          </div>
+
+          <form id="domain-form" class="domain-form">
+            <label>
+              Domain
+              <input id="domain-name" name="name" placeholder="example.com" autocomplete="off" required />
+            </label>
+            <label>
+              Mail hostname
+              <input id="domain-hostname" name="hostname" placeholder="mail.example.com" autocomplete="off" />
+            </label>
+            <button type="submit">Add domain</button>
+          </form>
+        </section>
+
+        <section class="domain-grid" id="domain-list" aria-live="polite"></section>
+      </section>
+    </main>
+
+    <template id="domain-template">
+      <article class="domain-card">
+        <div class="domain-header">
+          <div>
+            <h3></h3>
+            <p></p>
+          </div>
+          <span class="badge">DNS required</span>
+        </div>
+        <div class="records"></div>
+      </article>
+    </template>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
